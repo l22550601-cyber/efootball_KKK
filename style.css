@@ -1,95 +1,35 @@
-/* --- Effet spectaculaire pour la section GOAT (dashboard) --- */
+/* --- OVERRIDE: Dashboard GOAT section in cyan --- */
 .goat-glow {
+  background: #00fff0 !important;
+  border-radius: 40% 60% 65% 35% / 40% 35% 65% 60%;
+  padding: 0 0 18px 0;
+  box-shadow: 0 2px 24px #00fff055;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goat-card.glass {
+  background: #00fff0 !important;
+  border: 2.5px solid #00fff0 !important;
+  box-shadow: 0 2px 24px #00fff055, 0 0 0 6px #fff1;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 0 24px 0;
-  margin-bottom: 18px;
-  background: radial-gradient(ellipse at 60% 40%, #00fff055 0%, #0a0a23 80%, #000 100%);
-  border-radius: 40% 60% 65% 35% / 40% 35% 65% 60%;
-  box-shadow: 0 0 60px 10px #00fff044 inset, 0 0 32px 0 #00fff0;
-  position: relative;
-  animation: goatGlowPulse 3s infinite alternate;
-}
-@keyframes goatGlowPulse {
-  from { filter: drop-shadow(0 0 18px #00fff0); }
-  to { filter: drop-shadow(0 0 38px #00fff0); }
-}
-.goat-card.glass {
-  background: rgba(0,0,0,0.92);
-  border: 3px solid #00fff0;
-  box-shadow: 0 2px 32px #00fff099, 0 0 0 8px #00fff022, 0 0 0 2px #fff2 inset;
-  border-radius: 32px;
-  padding: 32px 24px 22px 24px;
-  margin-bottom: 0;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  z-index: 2;
-  transition: box-shadow .3s, border .3s, transform .2s;
-  overflow: visible;
-}
-.goat-card.glass:hover {
-  transform: scale(1.05) rotate(-1deg);
-  box-shadow: 0 0 80px #00fff0cc, 0 0 0 8px #00fff055 inset;
-  border: 3.5px solid #00fff0;
+  min-height: 200px;
 }
 .goat-card img {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  border: 5px solid #FFD700;
-  box-shadow: 0 0 48px #FFD70099, 0 0 0 12px #00fff033;
-  margin-bottom: 14px;
-  background: #141414;
-  transition: box-shadow 0.3s, border 0.3s;
-  position: relative;
-  z-index: 2;
-}
-.goat-card h2 {
-  color: #FFD700;
-  font-size: 2.1rem;
-  margin: 12px 0 8px 0;
-  letter-spacing: 2px;
-  font-weight: 900;
-  text-shadow: 0 2px 18px #FFD700, 0 0 2px #fff;
-  position: relative;
-  z-index: 2;
-}
-.goat-card p {
-  color: #fff;
-  background: linear-gradient(90deg,#FFD700 0%,#00fff0 100%);
-  border-radius: 14px;
-  padding: 10px 28px;
-  display: inline-block;
-  font-weight: bold;
-  font-size: 1.22em;
-  margin: 0;
-  box-shadow: 0 2px 18px #FFD70055, 0 0 0 4px #00fff022;
-  text-shadow: 0 2px 8px #00fff0;
-  position: relative;
-  z-index: 2;
-}
-.goat-card::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, #FFD70055 0%, transparent 80%);
-  border-radius: 50%;
-  z-index: 1;
-  filter: blur(12px);
-  pointer-events: none;
-}
-@media (max-width: 480px) {
-  .goat-card img { width: 80px; height: 80px; }
-  .goat-card h2 { font-size: 1.3rem; }
-  .goat-card p { font-size: 1em; padding: 7px 14px; }
-  .goat-card::before { width: 110px; height: 110px; }
+  border: 4px solid #00fff0 !important;
+  box-shadow: 0 0 24px #00fff055;
+  margin-bottom: 10px;
+  background: #fff;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Barres de progression joueurs */
 .progress-bars {
@@ -287,6 +227,8 @@ nav span {
   line-height: 1;
 }
 
+/* Example selector */
+.my-class {
   display: none;
   padding: 24px 4vw 140px 4vw;
   animation: fadein 0.7s cubic-bezier(.4,2,.6,1);
@@ -305,12 +247,17 @@ section.active {
 
 @keyframes fadein {
   from { opacity: 0; transform: translateY(30px) scale(0.98); }
-  @media (max-width: 768px) {
-    html, body {
-      width: 100vw;
-      max-width: 100vw;
-      overflow-x: hidden !important;
-    }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+  }
+  /* ...other responsive rules... */
+}
     body {
       font-size: 15px;
       background: linear-gradient(120deg, #181818 0%, #232526 100%);
@@ -439,7 +386,8 @@ section.active {
     .diagramme-spacer {
       height: 18px;
     }
-  }
+/* Example: wrap in a selector */
+.my-other-class {
   border: 2.5px solid #e50914;
   box-shadow: 0 4px 24px rgba(229,9,20,0.13), 0 1.5px 0 #e50914 inset;
   border-radius: 32px;
@@ -449,7 +397,7 @@ section.active {
   color: #fff;
   position: relative;
   z-index: 2;
-  transition: box-shadow .3s,border .3s;
+  transition: box-shadow .3s, border .3s;
 }
 .goat-card:hover{
   transform:translateY(-4px);
