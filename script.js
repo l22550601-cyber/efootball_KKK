@@ -7,6 +7,11 @@ let state=JSON.parse(localStorage.getItem("ligueGoat"))||{
     create("Joueur 1"),
     create("Joueur 2"),
     create("Joueur 3")
+  ],
+  bonus:[
+    {label:"Meilleur buteur", winner:null},
+    {label:"Meilleure série", winner:null},
+    {label:"Fair-play", winner:null}
   ]
 };
 
@@ -16,6 +21,8 @@ function create(name){
     avatar:"",
     pts:0,v:0,n:0,d:0,
     matches:0,
+    buts:0,
+    encaisses:0,
     history:[]
   }
 }
@@ -51,6 +58,12 @@ matchForm.onsubmit=e=>{
   const pA=state.players[A],pB=state.players[B];
   pA.matches++;pB.matches++;
 
+  // Ajout des buts et encaissés
+  pA.buts += sA;
+  pA.encaisses += sB;
+  pB.buts += sB;
+  pB.encaisses += sA;
+
   if(sA>sB){pA.v++;pA.pts+=3;pB.d++}
   else if(sB>sA){pB.v++;pB.pts+=3;pA.d++}
   else{pA.n++;pB.n++;pA.pts++;pB.pts++}
@@ -66,6 +79,32 @@ function update(){
   updateTable();
   updateChart();
   updateEdit();
+  updateBonus();
+}
+
+function updateBonus(){
+  if(!document.getElementById('bonusList')) return;
+  bonusList.innerHTML = '';
+  (state.bonus||[]).forEach((b, i) => {
+    bonusList.innerHTML += `
+      <div class="glass">
+        <strong>${b.label}</strong><br>
+        <select onchange="setBonusWinner(${i},this.value)">
+          <option value="">-- Choisir --</option>
+          ${state.players.map((p,pi)=>`<option value="${pi}" ${b.winner==pi?'selected':''}>${p.name}</option>`).join('')}
+        </select>
+        <div style="margin-top:6px;color:gold;min-height:18px;">
+          ${b.winner!==null?`🏅 ${state.players[b.winner].name}`:''}
+        </div>
+      </div>
+    `;
+  });
+}
+
+window.setBonusWinner = (bonusIdx, playerIdx) => {
+  if(playerIdx==='') state.bonus[bonusIdx].winner = null;
+  else state.bonus[bonusIdx].winner = +playerIdx;
+  save(); update();
 }
 
 function updateGoat(){
@@ -81,6 +120,7 @@ function updateTable(){
   table.innerHTML="";
   const top=ranking()[0];
   ranking().forEach((p,i)=>{
+    const diff = (p.buts||0)-(p.encaisses||0);
     table.innerHTML+=`
       <tr class="${p===top?'goat-row':''}">
         <td>${i+1}</td>
@@ -90,6 +130,8 @@ function updateTable(){
         <td>${p.n}</td>
         <td>${p.d}</td>
         <td>${p.matches}/${MAX}</td>
+        <td>${p.buts||0}</td>
+        <td>${diff}</td>
       </tr>`;
   });
 }
@@ -140,7 +182,7 @@ window.avatar=(i,input)=>{
 function resetMonth(){
   state.month++;
   state.players.forEach(p=>{
-    p.pts=p.v=p.n=p.d=p.matches=0;
+    p.pts=p.v=p.n=p.d=p.matches=p.buts=p.encaisses=0;
     p.history=[];
   });
   save();update();
