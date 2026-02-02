@@ -131,7 +131,7 @@ function updateGoat(){
   goatCard.innerHTML=`
     <img src="${g.avatar||'https://i.imgur.com/6VBx3io.png'}">
     <h2>${g.name}</h2>
-    <p>👑 GOAT – ${g.pts} pts</p>
+    <p>👑 LE GOAT – ${g.pts} pts</p>
   `;
 }
 
