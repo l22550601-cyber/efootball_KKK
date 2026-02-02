@@ -150,6 +150,7 @@ function updateTable(){
         <td>${p.d}</td>
         <td>${p.matches}/${MAX}</td>
         <td>${p.buts||0}</td>
+        <td>${p.encaisses||0}</td>
         <td>${diff}</td>
       </tr>`;
   });

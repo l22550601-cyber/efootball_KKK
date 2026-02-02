@@ -1,150 +1,162 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<title>Ligue GOAT</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Ligue GOAT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- Charts -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
-<header class="glass mobile-header">
-  <h1>₪football KKK</h1>
-</header>
+  <header class="glass mobile-header">
+    <h1>KB-₪football </h1>
+  </header>
 
-<nav class="mobile-nav glass">
-  <button onclick="show('dashboard')"><i data-lucide="home"></i><span>Accueil</span></button>
-  <button onclick="show('match')"><i data-lucide="swords"></i><span>Match</span></button>
-  <button onclick="show('classement')"><i data-lucide="bar-chart-3"></i><span>Classement</span></button>
-  <button onclick="show('bonus')"><i data-lucide="award"></i><span>Bonus</span></button>
-  <button onclick="show('protection')"><i data-lucide="shield"></i><span>GOAT</span></button>
-  <button onclick="show('historique')"><i data-lucide="crown"></i><span>Hist.</span></button>
-  <button onclick="show('parametres')"><i data-lucide="settings"></i><span>Param.</span></button>
-</nav>
-
-
-<main class="main-mobile">
+  <nav class="mobile-nav glass">
+    <button onclick="show('dashboard')"><i data-lucide="home"></i><span>Accueil</span></button>
+    <button onclick="show('match')"><i data-lucide="swords"></i><span>Match</span></button>
+    <button onclick="show('classement')"><i data-lucide="bar-chart-3"></i><span>Classement</span></button>
+    <button onclick="show('bonus')"><i data-lucide="award"></i><span>Bonus</span></button>
+    <button onclick="show('protection')"><i data-lucide="shield"></i><span>GOAT</span></button>
+    <button onclick="show('historique')"><i data-lucide="crown"></i><span>Hist.</span></button>
+    <button onclick="show('parametres')"><i data-lucide="settings"></i><span>Param.</span></button>
+  </nav>
 
 
-<section id="dashboard" class="active dashboard">
-  <div class="goat-glow">
-    <div id="goatCard" class="goat-card glass"></div>
-  </div>
-  <div class="chart-card glass global-chart">
-    <h3>📈 Évolution des joueurs</h3>
-    <canvas id="evolutionChart"></canvas>
-  </div>
-   <div class="chart-card glass global-chart" style="max-width:100%;margin-top:32px;">
-      <canvas id="evolutionChartClassement" style="width:100%;height:340px;max-height:340px;display:block;"></canvas>
-    </div>
-    <div class="diagramme-spacer"></div>
-</section>
+  <main class="main-mobile">
 
 
-<section id="match" class="match">
-  <h2>⚔️ Match</h2>
-  <form id="matchForm" class="glass duel">
-    <div class="duel-block">
-      <select id="playerA"></select>
-      <input id="scoreA" type="number" required placeholder="Score">
-    </div>
-    <span>VS</span>
-    <div class="duel-block">
-      <select id="playerB"></select>
-      <input id="scoreB" type="number" required placeholder="Score">
-    </div>
-    <button>Valider</button>
-  </form>
-</section>
+    <section id="dashboard" class="active dashboard">
+      <div class="goat-glow" style="background:#181818;border-radius:24px;padding:0 0 18px 0;box-shadow:0 2px 16px rgba(0,0,0,0.12);">
+        <div id="goatCard" class="goat-card glass" style="background:#232526;border:2px solid #e50914;box-shadow:0 2px 12px #111;"></div>
+      </div>
+      <div class="chart-card glass global-chart" style="background:#232526;border:2px solid #e50914;box-shadow:0 2px 12px #111;">
+        <h3 style="color:#fff;background:#e50914;border-radius:8px;display:inline-block;padding:4px 16px;font-size:1.1rem;margin-bottom:8px;letter-spacing:1px;font-weight:700;box-shadow:0 2px 8px #111;">📈 Évolution des joueurs</h3>
+        <canvas id="evolutionChart" style="background:#181818;border-radius:10px;"></canvas>
+      </div>
+      <div class="chart-card glass global-chart" style="background:#232526;border:2px solid #e50914;box-shadow:0 2px 12px #111;max-width:100%;margin-top:32px;">
+        <canvas id="evolutionChartClassement" style="width:100%;height:340px;max-height:340px;display:block;background:#181818;border-radius:10px;"></canvas>
+      </div>
+      <div class="diagramme-spacer"></div>
+    </section>
 
 
-<section id="classement" class="classement">
-  <div class="glass classement-mobile">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th><th>Joueur</th><th>Pts</th><th>V</th><th>N</th><th>D</th><th>M</th><th>Buts</th><th>Diff.</th>
-        </tr>
-      </thead>
-      <tbody id="table"></tbody>
-    </table>
-   
-    <div class="diagramme-spacer"></div>
-  </div>
-</section>
+    <section id="match" class="match">
+      <h2>⚔️ Match</h2>
+      <form id="matchForm" class="glass duel">
+        <div class="duel-block">
+          <select id="playerA"></select>
+          <input id="scoreA" type="number" required placeholder="Score">
+        </div>
+        <span>VS</span>
+        <div class="duel-block">
+          <select id="playerB"></select>
+          <input id="scoreB" type="number" required placeholder="Score">
+        </div>
+        <button>Valider</button>
+      </form>
+    </section>
 
 
-<section id="bonus" class="bonus">
-  <div class="bonus-grid" id="bonusList"></div>
-</section>
+    <section id="classement" class="classement">
+      <div class="glass classement-mobile">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Joueur</th>
+              <th>Pts</th>
+              <th>V</th>
+              <th>N</th>
+              <th>D</th>
+              <th>M</th>
+              <th>Buts</th>
+              <th>Encaissés</th>
+              <th>Diff.</th>
+            </tr>
+          </thead>
+          <tbody id="table"></tbody>
+        </table>
+
+        <div class="diagramme-spacer"></div>
+      </div>
+    </section>
 
 
-<section id="protection" class="protection">
-  <div class="glass">
-    <h2>🛡️ GOAT Protection</h2>
-    <form id="protectForm" class="protect-form-mobile">
-      <select id="challenger"></select>
-      <input id="gScore" type="number" required placeholder="GOAT">
-      <input id="cScore" type="number" required placeholder="Challenger">
-      <button>Défendre</button>
-    </form>
-    <div id="protectStatus"></div>
-  </div>
-</section>
+    <section id="bonus" class="bonus">
+      <div class="bonus-grid" id="bonusList"></div>
+    </section>
 
 
-<section id="historique" class="historique">
-  <ul id="history"></ul>
-</section>
+    <section id="protection" class="protection">
+      <div class="glass">
+        <h2>🛡️ GOAT Protection</h2>
+        <form id="protectForm" class="protect-form-mobile">
+          <select id="challenger"></select>
+          <input id="gScore" type="number" required placeholder="GOAT">
+          <input id="cScore" type="number" required placeholder="Challenger">
+          <button>Défendre</button>
+        </form>
+        <div id="protectStatus"></div>
+      </div>
+    </section>
 
 
-<section id="parametres" class="parametres">
-  <div class="glass">
-    <h3>👤 Joueurs</h3>
-    <div id="editPlayers"></div>
-  </div>
-
-  <details class="glass">
-    <summary>📜 Règles de la ligue</summary>
-    <p>
-      • Victoire : 3 pts<br>
-      • Nul : 1 pt<br>
-      • 25 matchs max<br>
-      • 2 défaites GOAT = perte du titre<br>
-      • Bonus mensuels
-    </p>
-  </details>
-
-  <details class="glass">
-    <summary>❓ Comment utiliser le site</summary>
-    <p>
-      1. Enregistrer les matchs<br>
-      2. Suivre le classement<br>
-      3. Défendre le GOAT<br>
-      4. Clôturer le mois
-    </p>
-  </details>
-
-  <div class="param-btns-mobile">
-    <button onclick="resetMonth()">Clôturer le mois</button>
-    <button onclick="resetAll()">Reset total</button>
-  </div>
-</section>
+    <section id="historique" class="historique">
+      <ul id="history"></ul>
+    </section>
 
 
+    <section id="parametres" class="parametres">
+      <div class="glass">
+        <h3>👤 Joueurs</h3>
+        <div id="editPlayers"></div>
+      </div>
 
-<!-- Supprimer le diagramme global hors accueil et classement -->
-</main>
+      <details class="glass">
+        <summary>📜 Règles de la ligue</summary>
+        <p>
+          • Victoire : 3 pts<br>
+          • Nul : 1 pt<br>
+          • 25 matchs max<br>
+          • 2 défaites GOAT = perte du titre<br>
+          • Bonus mensuels
+        </p>
+      </details>
 
-<script src="script.js"></script>
-<script>lucide.createIcons()</script>
+      <details class="glass">
+        <summary>❓ Comment utiliser le site</summary>
+        <p>
+          1. Enregistrer les matchs<br>
+          2. Suivre le classement<br>
+          3. Défendre le GOAT<br>
+          4. Clôturer le mois
+        </p>
+      </details>
+
+      <div class="param-btns-mobile">
+        <button onclick="resetMonth()">Clôturer le mois</button>
+        <button onclick="resetAll()">Reset total</button>
+      </div>
+    </section>
+
+
+
+    <!-- Supprimer le diagramme global hors accueil et classement -->
+  </main>
+
+  <script src="script.js"></script>
+  <script>lucide.createIcons()</script>
 </body>
+
 </html>
