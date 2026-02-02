@@ -38,6 +38,14 @@
   <div class="goat-glow">
     <div id="goatCard" class="goat-card glass"></div>
   </div>
+  <div class="chart-card glass global-chart">
+    <h3>📈 Évolution des joueurs</h3>
+    <canvas id="evolutionChart"></canvas>
+  </div>
+   <div class="chart-card glass global-chart" style="max-width:100%;margin-top:18px;">
+      <canvas id="evolutionChartClassement" style="width:100%;height:340px;max-height:340px;display:block;"></canvas>
+    </div>
+    <div class="diagramme-spacer"></div>
 </section>
 
 
@@ -68,6 +76,11 @@
       </thead>
       <tbody id="table"></tbody>
     </table>
+    <!-- Diagramme détaillé sous le tableau en version mobile -->
+    <div class="chart-card glass global-chart classement-diag-mobile">
+      <canvas id="evolutionChartClassement" style="width:100%;height:340px;max-height:340px;display:block;"></canvas>
+    </div>
+    <div class="diagramme-spacer"></div>
   </div>
 </section>
 
@@ -131,13 +144,7 @@
 
 
 
-<!-- 📈 DIAGRAMME GLOBAL -->
-<div class="chart-card glass global-chart">
-  <h3>📈 Évolution des joueurs</h3>
-  <canvas id="evolutionChart"></canvas>
-</div>
-<div class="diagramme-spacer"></div>
-
+<!-- Supprimer le diagramme global hors accueil et classement -->
 </main>
 
 <script src="script.js"></script>

@@ -71,6 +71,15 @@ matchForm.onsubmit=e=>{
   pA.history.push(pA.pts);
   pB.history.push(pB.pts);
 
+  // Ajout à l'historique global
+  state.history.push({
+    date: new Date().toLocaleString(),
+    joueurA: pA.name,
+    scoreA: sA,
+    joueurB: pB.name,
+    scoreB: sB
+  });
+
   save();update();e.target.reset();
 };
 
@@ -78,8 +87,18 @@ function update(){
   updateGoat();
   updateTable();
   updateChart();
+  updateChartClassement();
   updateEdit();
   updateBonus();
+  updateHistory();
+}
+
+function updateHistory(){
+  if(!document.getElementById('history')) return;
+  history.innerHTML = '';
+  (state.history||[]).slice().reverse().forEach(h => {
+    history.innerHTML += `<li><span style="color:gold">${h.date}</span> : <b>${h.joueurA}</b> <span style="color:#fff">${h.scoreA}</span> - <span style="color:#fff">${h.scoreB}</span> <b>${h.joueurB}</b></li>`;
+  });
 }
 
 function updateBonus(){
@@ -142,20 +161,60 @@ function updateChart(){
     type:"line",
     data:{
       labels:[...Array(MAX).keys()].map(i=>i+1),
-      datasets:state.players.map(p=>({
+      datasets:state.players.map((p,idx)=>({
         label:p.name,
         data:p.history,
-        tension:.4,
+        tension:.5,
         borderWidth:3,
-        fill:true
+        fill:true,
+        borderColor:["#FFD700","#00BFFF","#FF6347","#32CD32","#FF69B4"][idx%5],
+        backgroundColor:["rgba(255,215,0,0.15)","rgba(0,191,255,0.15)","rgba(255,99,71,0.15)","rgba(50,205,50,0.15)","rgba(255,105,180,0.15)"][idx%5]
       }))
     },
     options:{
       animation:{duration:1200},
-      plugins:{legend:{labels:{color:"#fff"}}},
+      plugins:{
+        legend:{labels:{color:"gold",font:{size:13}}},
+        title:{display:true,text:"Progression des joueurs",color:"gold",font:{size:15}}
+      },
       scales:{
-        x:{ticks:{color:"#aaa"}},
-        y:{ticks:{color:"#aaa"}}
+        x:{ticks:{color:"#FFD700"}},
+        y:{ticks:{color:"#FFD700"}}
+      }
+    }
+  });
+}
+
+function updateChartClassement(){
+  if(!window.evolutionChartClassement) return;
+  if(window.chartClassement)window.chartClassement.destroy();
+  window.chartClassement=new Chart(evolutionChartClassement,{
+    type:"bar",
+    data:{
+      labels:state.players.map(p=>p.name),
+      datasets:[{
+        label:"Buts",
+        data:state.players.map(p=>p.buts||0),
+        backgroundColor:"rgba(255,215,0,0.7)",
+        borderColor:"gold",
+        borderWidth:2
+      },{
+        label:"Différence",
+        data:state.players.map(p=>(p.buts||0)-(p.encaisses||0)),
+        backgroundColor:"rgba(0,191,255,0.5)",
+        borderColor:"#00BFFF",
+        borderWidth:2
+      }]
+    },
+    options:{
+      indexAxis: 'y',
+      animation:{duration:1200},
+      plugins:{
+        legend:{labels:{color:"gold",font:{size:13}}}
+      },
+      scales:{
+        x:{ticks:{color:"#FFD700"}},
+        y:{ticks:{color:"#FFD700"}}
       }
     }
   });
