@@ -29,9 +29,55 @@ function create(name){
 
 const save=()=>localStorage.setItem("ligueGoat",JSON.stringify(state));
 
-function show(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+
+// Animation de transition de section et effet dynamique sur navigation
+function show(id) {
+  document.querySelectorAll("section").forEach(s => {
+    if (s.classList.contains("active")) {
+      s.classList.remove("active");
+      s.classList.add("fade-out");
+      setTimeout(() => s.classList.remove("fade-out"), 400);
+    }
+  });
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.add("active");
+    el.classList.add("fade-in");
+    setTimeout(() => el.classList.remove("fade-in"), 400);
+  }
+  // Animation sur le bouton nav actif
+  document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("nav-active"));
+  const navBtns = document.querySelectorAll("nav button");
+  if (navBtns && navBtns.length) {
+    const idx = ["dashboard","match","classement","diagramme","bonus","protection","historique","parametres"].indexOf(id);
+    if (idx >= 0) navBtns[idx].classList.add("nav-active");
+  }
+  // Affichage conditionnel des graphiques
+  if (id === 'diagramme') {
+    setTimeout(() => {
+      updateChart();
+      updateChartClassement();
+    }, 350);
+  }
+}
+
+// Toast notification
+function toast(msg, color = '#00fff0') {
+  let t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = msg;
+  t.style.background = `linear-gradient(90deg, ${color} 0%, #232526 100%)`;
+  document.body.appendChild(t);
+  setTimeout(() => t.classList.add('show'), 10);
+  setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 400); }, 2600);
+}
+
+// Effet vibration sur victoire GOAT
+function goatVibrate() {
+  const card = document.querySelector('.goat-card');
+  if (!card) return;
+  card.classList.add('vibrate');
+  setTimeout(() => card.classList.remove('vibrate'), 700);
 }
 
 function ranking(){
@@ -64,9 +110,21 @@ matchForm.onsubmit=e=>{
   pB.buts += sB;
   pB.encaisses += sA;
 
-  if(sA>sB){pA.v++;pA.pts+=3;pB.d++}
-  else if(sB>sA){pB.v++;pB.pts+=3;pA.d++}
-  else{pA.n++;pB.n++;pA.pts++;pB.pts++}
+
+  if(sA>sB){
+    pA.v++;pA.pts+=3;pB.d++;
+    toast(`<b>${pA.name}</b> remporte le duel !`, '#00fff0');
+    if (ranking()[0] === pA) goatVibrate();
+  }
+  else if(sB>sA){
+    pB.v++;pB.pts+=3;pA.d++;
+    toast(`<b>${pB.name}</b> remporte le duel !`, '#00fff0');
+    if (ranking()[0] === pB) goatVibrate();
+  }
+  else{
+    pA.n++;pB.n++;pA.pts++;pB.pts++;
+    toast('Match nul !', '#FFD700');
+  }
 
   pA.history.push(pA.pts);
   pB.history.push(pB.pts);
@@ -86,11 +144,27 @@ matchForm.onsubmit=e=>{
 function update(){
   updateGoat();
   updateTable();
-  updateChart();
-  updateChartClassement();
+  updateProgressBars();
   updateEdit();
   updateBonus();
   updateHistory();
+}
+// Affichage des barres de progression pour chaque joueur
+function updateProgressBars() {
+  const container = document.getElementById('progressBars');
+  if (!container) return;
+  const maxPts = state.players.reduce((max, p) => p.pts > max ? p.pts : max, 1);
+  container.innerHTML = '';
+  state.players.forEach(p => {
+    const percent = maxPts ? Math.round((p.pts / maxPts) * 100) : 0;
+    container.innerHTML += `
+      <div class="progress-bar-block">
+        <span class="progress-bar-label">${p.name}</span>
+        <div class="progress-bar"><div class="progress-bar-inner" style="width:${percent}%;"></div></div>
+        <span class="progress-bar-value">${p.pts} pts</span>
+      </div>
+    `;
+  });
 }
 
 function updateHistory(){
@@ -157,7 +231,11 @@ function updateTable(){
 }
 
 function updateChart(){
+  // N'affiche le graphique que si la section diagramme est visible
+  const diagSection = document.getElementById('diagramme');
+  if (!diagSection || !diagSection.classList.contains('active')) return;
   if(window.chart)window.chart.destroy();
+  if (!window.evolutionChart) return;
   window.chart=new Chart(evolutionChart,{
     type:"line",
     data:{
@@ -187,6 +265,9 @@ function updateChart(){
 }
 
 function updateChartClassement(){
+  // N'affiche le graphique que si la section diagramme est visible
+  const diagSection = document.getElementById('diagramme');
+  if (!diagSection || !diagSection.classList.contains('active')) return;
   if(!window.evolutionChartClassement) return;
   if(window.chartClassement)window.chartClassement.destroy();
   window.chartClassement=new Chart(evolutionChartClassement,{
@@ -273,11 +354,15 @@ protectForm.onsubmit = e => {
   let msg = '';
   if (gScore > cScore) {
     msg = `<span style='color:lime'>${goat.name} défend son titre !</span>`;
+    toast(`👑 ${goat.name} défend son titre !`, '#00fff0');
+    goatVibrate();
   } else if (cScore > gScore) {
     msg = `<span style='color:gold'>${challenger.name} détrône le GOAT !</span>`;
-    // Optionnel : transférer le titre, réinitialiser les stats, etc.
+    toast(`👑 ${challenger.name} détrône le GOAT !`, '#FFD700');
+    goatVibrate();
   } else {
     msg = `<span style='color:orange'>Match nul, le GOAT reste en place.</span>`;
+    toast('Match nul, le GOAT reste en place.', '#FFD700');
   }
   protectStatus.innerHTML = msg;
 };
@@ -285,6 +370,23 @@ protectForm.onsubmit = e => {
 // Sélecteurs pour le formulaire GOAT
 const gScoreInput = document.getElementById('gScore');
 const cScoreInput = document.getElementById('cScore');
+
+
+// Ajout d'un effet de survol dynamique sur les boutons nav
+document.querySelectorAll('nav button').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    btn.style.transform = 'scale(1.12) rotate(-2deg)';
+  });
+  btn.addEventListener('mouseleave', e => {
+    btn.style.transform = '';
+  });
+});
+
+// Ajout d'une animation d'entrée sur la page au chargement
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('page-loaded');
+  setTimeout(() => document.body.classList.remove('page-loaded'), 1200);
+});
 
 loadSelects();
 update();
