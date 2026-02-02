@@ -1,0 +1,281 @@
+*{box-sizing:border-box;font-family:Inter,system-ui}
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#111,#000);
+  color:#fff;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  padding:15px;
+  text-align:center;
+}
+
+nav button{
+  background:transparent;
+  border:0;
+  color:#fff;
+  padding:10px;
+  border-radius:14px;
+  transition:.25s;
+}
+nav button:hover{
+  background:rgba(255,215,0,.2);
+  transform:scale(1.1);
+}
+
+section{
+  display:none;
+  padding:20px;
+  padding-bottom:140px;
+  animation:fade .5s;
+}
+section.active{display:block}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:none}
+}
+
+.glass{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 0 40px rgba(0,0,0,.4);
+}
+
+/* 🐐 GOAT */
+.goat-glow{
+  animation:glow 3s infinite alternate;
+}
+@keyframes glow{
+  from{filter:drop-shadow(0 0 10px gold)}
+  to{filter:drop-shadow(0 0 28px gold)}
+}
+
+.goat-card{
+  text-align:center;
+  transition:transform .3s;
+}
+.goat-card:hover{
+  transform:translateY(-4px);
+}
+.goat-card img{
+  width:120px;height:120px;
+  border-radius:50%;
+  border:3px solid gold;
+}
+
+/* Match */
+.duel{
+  display:flex;
+  gap:15px;
+  align-items:center;
+  justify-content:center;
+}
+.duel div{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* Table */
+table{width:100%}
+th,td{
+  padding:10px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+
+/* Inputs */
+input,select,button{
+  padding:10px;
+  border-radius:12px;
+  border:0;
+}
+button{
+  background:gold;
+  cursor:pointer;
+  transition:.25s;
+}
+button:hover{transform:scale(1.05)}
+
+.bonus-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+/* 📈 DIAGRAMME GLOBAL */
+.global-chart{
+  margin:15px;
+  animation:slideUp .4s ease;
+}
+@keyframes slideUp{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:none;opacity:1}
+}
+
+/* 📱 MOBILE PRIORITY */
+@media(max-width:768px){
+  .global-chart{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:0;
+    border-radius:20px 20px 0 0;
+    z-index:90;
+    box-shadow:0 -10px 30px rgba(0,0,0,.6);
+  }
+
+  .global-chart h3{
+    font-size:14px;
+    text-align:center;
+    margin-bottom:6px;
+  }
+
+  .global-chart canvas{
+    max-height:180px;
+  }
+
+  nav{
+    display:flex;
+    justify-content:space-around;
+  }
+}
+
+/* 🖥️ DESKTOP */
+@media(min-width:769px){
+  section{padding-bottom:40px}
+  .global-chart{
+    position:relative;
+    margin-top:30px;
+  }
+}
+
+
+
+
+
+
+
+
+/* ============================= */
+/*  MOBILE SAFE LAYOUT – NO OVERFLOW */
+/* ============================= */
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Empêche tout élément de dépasser */
+* {
+  max-width: 100%;
+}
+
+/* Main & sections */
+main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tables : scroll interne si besoin */
+table {
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+th, td {
+  font-size: 13px;
+  padding: 8px 4px;
+}
+
+/* Inputs et boutons full width */
+input, select, button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Duel mobile */
+.duel {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.duel span {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* BONUS GRID */
+.bonus-grid {
+  grid-template-columns: 1fr;
+}
+
+/* 📈 DIAGRAMME MOBILE SAFE */
+@media (max-width: 768px) {
+
+  .global-chart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 12px;
+
+    border-radius: 18px 18px 0 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .global-chart canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 160px;
+    display: block;
+  }
+
+  /* Espace réservé pour le graphique */
+  section {
+    padding-bottom: 200px !important;
+  }
+
+  /* Header */
+  header {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  nav button {
+    padding: 8px;
+    flex: 1;
+  }
+
+  /* Goat card safe */
+  .goat-card img {
+    max-width: 90px;
+    max-height: 90px;
+  }
+}

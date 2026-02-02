@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Ligue GOAT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="glass">
+  <h1>🐐 LIGUE GOAT</h1>
+  <nav>
+    <button onclick="show('dashboard')"><i data-lucide="home"></i></button>
+    <button onclick="show('match')"><i data-lucide="swords"></i></button>
+    <button onclick="show('classement')"><i data-lucide="bar-chart-3"></i></button>
+    <button onclick="show('bonus')"><i data-lucide="award"></i></button>
+    <button onclick="show('protection')"><i data-lucide="shield"></i></button>
+    <button onclick="show('historique')"><i data-lucide="crown"></i></button>
+    <button onclick="show('parametres')"><i data-lucide="settings"></i></button>
+  </nav>
+</header>
+
+<main>
+
+<section id="dashboard" class="active dashboard">
+  <div class="goat-glow">
+    <div id="goatCard" class="goat-card glass"></div>
+  </div>
+</section>
+
+<section id="match" class="match">
+  <h2>⚔️ Match</h2>
+  <form id="matchForm" class="glass duel">
+    <div>
+      <select id="playerA"></select>
+      <input id="scoreA" type="number" required placeholder="Score">
+    </div>
+    <span>VS</span>
+    <div>
+      <select id="playerB"></select>
+      <input id="scoreB" type="number" required placeholder="Score">
+    </div>
+    <button>Valider</button>
+  </form>
+</section>
+
+<section id="classement" class="classement">
+  <div class="glass">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Joueur</th><th>Pts</th><th>V</th><th>N</th><th>D</th><th>M</th>
+        </tr>
+      </thead>
+      <tbody id="table"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="bonus" class="bonus">
+  <div class="bonus-grid" id="bonusList"></div>
+</section>
+
+<section id="protection" class="protection">
+  <div class="glass">
+    <h2>🛡️ GOAT Protection</h2>
+    <form id="protectForm">
+      <select id="challenger"></select>
+      <input id="gScore" type="number" required placeholder="GOAT">
+      <input id="cScore" type="number" required placeholder="Challenger">
+      <button>Défendre</button>
+    </form>
+    <div id="protectStatus"></div>
+  </div>
+</section>
+
+<section id="historique" class="historique">
+  <ul id="history"></ul>
+</section>
+
+<section id="parametres" class="parametres">
+  <div class="glass">
+    <h3>👤 Joueurs</h3>
+    <div id="editPlayers"></div>
+  </div>
+
+  <details class="glass">
+    <summary>📜 Règles de la ligue</summary>
+    <p>
+      • Victoire : 3 pts<br>
+      • Nul : 1 pt<br>
+      • 25 matchs max<br>
+      • 2 défaites GOAT = perte du titre<br>
+      • Bonus mensuels
+    </p>
+  </details>
+
+  <details class="glass">
+    <summary>❓ Comment utiliser le site</summary>
+    <p>
+      1. Enregistrer les matchs<br>
+      2. Suivre le classement<br>
+      3. Défendre le GOAT<br>
+      4. Clôturer le mois
+    </p>
+  </details>
+
+  <button onclick="resetMonth()">Clôturer le mois</button>
+  <button onclick="resetAll()">Reset total</button>
+</section>
+
+<!-- 📈 DIAGRAMME GLOBAL -->
+<div class="chart-card glass global-chart">
+  <h3>📈 Évolution des joueurs</h3>
+  <canvas id="evolutionChart"></canvas>
+</div>
+
+</main>
+
+<script src="script.js"></script>
+<script>lucide.createIcons()</script>
+</body>
+</html>
