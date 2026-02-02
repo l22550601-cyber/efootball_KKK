@@ -631,21 +631,21 @@ button:hover{transform:scale(1.05)}
 
 
 .active dashboard{
-  background:radial-gradient(circle at 60% 40%, #cfcfcf 0%, #0a0a23 80%, #000 100%);
+  background:radial-gradient(circle at 60% 40%, #000000 0%, #0a0a23 80%, #000 100%);
   border-radius:32px;
   box-shadow:0 0 60px 10px #6f00ff44 inset,0 0 32px 0 #e4b5b5;
   overflow:hidden;
 }
 
 .goat-glow{
-  background:rgba(236, 236, 236, 0.7); 
+  background:rgb(185, 183, 183); 
    border-radius: 40% 60% 65% 35% / 40% 35% 65% 60%;
    padding:0 0 18px 0;
   box-shadow:0 2px 24px #6f00ff55
 }
 
 .goat-card.glass{
-  background:rgb(1, 0, 0);
+  background:rgb(0, 0, 0);
   border:2.5px solid #ff88007d;
   box-shadow:0 2px 24px #fdfdfd55,0 0 0 6px #fff1;
   border-radius:24px
@@ -653,7 +653,7 @@ button:hover{transform:scale(1.05)}
 
 .chart-card.glass.global-chart{
   background:rgba(243, 241, 240, 0.612);
-  border: 2.5px solid #6f00ff;
+  border: 2.5px solid #000000;
   box-shadow:0 2px 24px #6f00ff55,0 0 0 6px #fff1;
   border-radius:24px;
   margin-top:18px
@@ -661,7 +661,7 @@ button:hover{transform:scale(1.05)}
 
 h3{
   color:#fff;
-  background:linear-gradient(90deg,#6f00ff 0%,#00fff0 100%);
+  background:linear-gradient(90deg,#000000 0%,#00fff0 100%);
   border-radius:10px;
   display:inline-block;
   padding:4px 18px;
@@ -669,7 +669,7 @@ h3{
   margin-bottom:10px;
   letter-spacing:1.2px;
   font-weight:700;
-  box-shadow:0 2px 8px #6f00ff44;
+  box-shadow:0 2px 8px #00000063;
   text-shadow:0 2px 8px #000
 }
 
