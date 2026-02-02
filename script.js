@@ -253,5 +253,38 @@ function resetAll(){
   location.reload();
 }
 
+// --- GOAT PROTECTION ---
+protectForm.onsubmit = e => {
+  e.preventDefault();
+  const goatIdx = ranking().findIndex(p => p === ranking()[0]);
+  const challengerIdx = +challenger.value;
+  const gScore = +gScoreInput.value;
+  const cScore = +cScoreInput.value;
+  if (challengerIdx === goatIdx) {
+    protectStatus.innerHTML = '<span style="color:red">Le GOAT ne peut pas se défier lui-même !</span>';
+    return;
+  }
+  if (isNaN(gScore) || isNaN(cScore)) {
+    protectStatus.innerHTML = '<span style="color:red">Scores invalides.</span>';
+    return;
+  }
+  let goat = ranking()[0];
+  let challenger = state.players[challengerIdx];
+  let msg = '';
+  if (gScore > cScore) {
+    msg = `<span style='color:lime'>${goat.name} défend son titre !</span>`;
+  } else if (cScore > gScore) {
+    msg = `<span style='color:gold'>${challenger.name} détrône le GOAT !</span>`;
+    // Optionnel : transférer le titre, réinitialiser les stats, etc.
+  } else {
+    msg = `<span style='color:orange'>Match nul, le GOAT reste en place.</span>`;
+  }
+  protectStatus.innerHTML = msg;
+};
+
+// Sélecteurs pour le formulaire GOAT
+const gScoreInput = document.getElementById('gScore');
+const cScoreInput = document.getElementById('cScore');
+
 loadSelects();
 update();
