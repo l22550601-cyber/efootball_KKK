@@ -157,125 +157,100 @@ button:hover{transform:scale(1.05)}
   }
 }
 
-
-
-
-
-
-
-
-/* ============================= */
-/*  MOBILE SAFE LAYOUT – NO OVERFLOW */
-/* ============================= */
-
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+/* ===== NOUVEAU DESIGN MOBILE ===== */
+.mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(20,20,20,0.95);
+  padding: 10px 0 0 0;
+  text-align: center;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
 }
 
-/* Empêche tout élément de dépasser */
-* {
-  max-width: 100%;
+.mobile-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  letter-spacing: 2px;
 }
 
-/* Main & sections */
-main {
-  width: 100%;
-  overflow-x: hidden;
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(20,20,20,0.98);
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.18);
+  padding: 0 2px;
+  height: 64px;
 }
 
-section {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Tables : scroll interne si besoin */
-table {
-  width: 100%;
-  table-layout: fixed;
-  word-wrap: break-word;
-}
-
-th, td {
-  font-size: 13px;
-  padding: 8px 4px;
-}
-
-/* Inputs et boutons full width */
-input, select, button {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Duel mobile */
-.duel {
+.mobile-nav button {
+  flex: 1;
+  display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  padding: 0;
+  margin: 0 2px;
+  border-radius: 12px;
+  transition: background 0.2s, color 0.2s;
+  gap: 2px;
+}
+.mobile-nav button:active, .mobile-nav button:focus {
+  background: rgba(255,215,0,0.13);
+  color: gold;
+}
+.mobile-nav i {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+.mobile-nav span {
+  font-size: 11px;
+  line-height: 1;
 }
 
-.duel span {
-  font-size: 14px;
-  opacity: 0.6;
+.main-mobile {
+  padding-bottom: 80px !important;
 }
 
-/* BONUS GRID */
-.bonus-grid {
-  grid-template-columns: 1fr;
+/* Sections modernisées */
+.classement-mobile {
+  padding: 8px 2px;
+  border-radius: 16px;
+  margin-bottom: 10px;
 }
 
-/* 📈 DIAGRAMME MOBILE SAFE */
+.protect-form-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.param-btns-mobile {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.param-btns-mobile button {
+  flex: 1;
+  font-size: 15px;
+  padding: 10px 0;
+}
+
 @media (max-width: 768px) {
-
-  .global-chart {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 12px;
-
-    border-radius: 18px 18px 0 0;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .global-chart canvas {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 160px;
-    display: block;
-  }
-
-  /* Espace réservé pour le graphique */
-  section {
-    padding-bottom: 200px !important;
-  }
-
-  /* Header */
-  header {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 4px;
-  }
-
-  nav button {
-    padding: 8px;
-    flex: 1;
-  }
-
-  /* Goat card safe */
-  .goat-card img {
-    max-width: 90px;
-    max-height: 90px;
-  }
+  .mobile-header {padding: 8px 0 0 0;}
+  .mobile-nav {height: 56px;}
+  .mobile-nav i {font-size: 19px;}
+  .mobile-nav span {font-size: 10px;}
+  .main-mobile {padding-bottom: 70px !important;}
 }
