@@ -36,16 +36,17 @@
   <main class="main-mobile">
 
 
-    <section id="dashboard" class="active dashboard">
-      <div class="goat-glow" style="background:#181818;border-radius:24px;padding:0 0 18px 0;box-shadow:0 2px 16px rgba(0,0,0,0.12);">
-        <div id="goatCard" class="goat-card glass" style="background:#232526;border:2px solid #e50914;box-shadow:0 2px 12px #111;"></div>
+    <section id="dashboard" class="active dashboard" style="background:radial-gradient(circle at 60% 40%, #1a0022 0%, #0a0a23 80%, #000 100%);border-radius:32px;box-shadow:0 0 60px 10px #6f00ff44 inset,0 0 32px 0 #000;overflow:hidden;">
+      <div class="goat-glow" style="background:rgba(30,0,60,0.7);border-radius:24px 24px 0 0;padding:0 0 18px 0;box-shadow:0 2px 24px #6f00ff55;">
+        <div id="goatCard" class="goat-card glass" style="background:rgba(20,10,40,0.95);border:2.5px solid #6f00ff;box-shadow:0 2px 24px #6f00ff55,0 0 0 6px #fff1;border-radius:24px;">
+        </div>
       </div>
-      <div class="chart-card glass global-chart" style="background:#232526;border:2px solid #e50914;box-shadow:0 2px 12px #111;">
-        <h3 style="color:#fff;background:#e50914;border-radius:8px;display:inline-block;padding:4px 16px;font-size:1.1rem;margin-bottom:8px;letter-spacing:1px;font-weight:700;box-shadow:0 2px 8px #111;">📈 Évolution des joueurs</h3>
-        <canvas id="evolutionChart" style="background:#181818;border-radius:10px;"></canvas>
+      <div class="chart-card glass global-chart" style="background:rgba(20,10,40,0.95);border:2.5px solid #6f00ff;box-shadow:0 2px 24px #6f00ff55,0 0 0 6px #fff1;border-radius:24px;margin-top:18px;">
+        <h3 style="color:#fff;background:linear-gradient(90deg,#6f00ff 0%,#00fff0 100%);border-radius:10px;display:inline-block;padding:4px 18px;font-size:1.18rem;margin-bottom:10px;letter-spacing:1.2px;font-weight:700;box-shadow:0 2px 8px #6f00ff44;text-shadow:0 2px 8px #000;">🧬 Évolution des joueurs</h3>
+        <canvas id="evolutionChart" style="background:linear-gradient(135deg,#0a0a23 60%,#6f00ff22 100%);border-radius:14px;box-shadow:0 0 18px #6f00ff44;margin:0 auto;display:block;"></canvas>
       </div>
-      <div class="chart-card glass global-chart" style="background:#232526;border:2px solid #e50914;box-shadow:0 2px 12px #111;max-width:100%;margin-top:32px;">
-        <canvas id="evolutionChartClassement" style="width:100%;height:340px;max-height:340px;display:block;background:#181818;border-radius:10px;"></canvas>
+      <div class="chart-card glass global-chart" style="background:rgba(20,10,40,0.95);border:2.5px solid #00fff0;box-shadow:0 2px 24px #00fff055,0 0 0 6px #fff1;border-radius:24px;max-width:100%;margin-top:32px;">
+        <canvas id="evolutionChartClassement" style="width:100%;height:340px;max-height:340px;display:block;background:linear-gradient(135deg,#0a0a23 60%,#00fff022 100%);border-radius:14px;box-shadow:0 0 18px #00fff044;"></canvas>
       </div>
       <div class="diagramme-spacer"></div>
     </section>
