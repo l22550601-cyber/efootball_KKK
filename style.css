@@ -303,6 +303,106 @@ button:hover{transform:scale(1.05)}
   }
 }
 
+/* ===================== */
+/* CSS SPÉCIALE MOBILE  */
+/* ===================== */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+    background: linear-gradient(120deg, #181818 0%, #232526 100%);
+    min-height: 100vh;
+  }
+  .mobile-header {
+    padding: 8px 0 0 0;
+    background: #181818;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  }
+  .mobile-header h1 {
+    font-size: 1.2rem;
+    color: gold;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .mobile-nav {
+    height: 56px;
+    background: #232526;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.18);
+  }
+  .mobile-nav button {
+    font-size: 12px;
+    color: #fff;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0 1px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .mobile-nav button:active, .mobile-nav button:focus {
+    background: rgba(255,215,0,0.13);
+    color: gold;
+  }
+  .mobile-nav i {
+    font-size: 18px;
+    margin-bottom: 1px;
+  }
+  .mobile-nav span {
+    font-size: 10px;
+    line-height: 1;
+  }
+  .main-mobile {
+    padding-bottom: 120px !important;
+  }
+  section {
+    padding: 12px 2px 12px 2px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  .glass {
+    border-radius: 14px;
+    padding: 12px 8px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.18);
+  }
+  .classement-mobile table th, .classement-mobile table td {
+    font-size: 12px;
+    padding: 6px 2px;
+  }
+  .goat-card img {
+    max-width: 70px;
+    max-height: 70px;
+    border: 2px solid gold;
+  }
+  .duel-block select, .duel-block input {
+    font-size: 14px;
+    padding: 8px 4px;
+  }
+  .duel-block {
+    gap: 4px;
+  }
+  .protect-form-mobile select, .protect-form-mobile input {
+    font-size: 14px;
+    padding: 8px 4px;
+  }
+  .param-btns-mobile button {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+  .bonus-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .chart-card.global-chart {
+    padding: 8px 0 16px 0;
+    border-radius: 18px 18px 0 0;
+    background: #232526;
+  }
+  .diagramme-spacer {
+    height: 18px;
+  }
+}
+
 /* Espace sous le diagramme */
 .diagramme-spacer {
   height: 24px;
