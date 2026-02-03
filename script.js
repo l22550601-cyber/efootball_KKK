@@ -1,4 +1,4 @@
-const MAX=38;
+const MAX=40;
 
 let state=JSON.parse(localStorage.getItem("ligueGoat"))||{
   month:1,
