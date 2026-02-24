@@ -1,4 +1,4 @@
-const MAX=40;
+const MAX=32;
 
 let state=JSON.parse(localStorage.getItem("ligueGoat"))||{
   month:1,
@@ -6,7 +6,11 @@ let state=JSON.parse(localStorage.getItem("ligueGoat"))||{
   players:[
     create("Joueur 1"),
     create("Joueur 2"),
-    create("Joueur 3")
+    create("Joueur 3"),
+    create("joueur 4"),
+   
+
+
   ],
   bonus:[
     {label:"Meilleur buteur", winner:null},
